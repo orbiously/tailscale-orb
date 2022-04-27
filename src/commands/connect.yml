@@ -1,0 +1,15 @@
+description: >
+  Use this command to connect to your Tailnet and confirm reachability of your Tailscale destination host.
+
+parameters:
+  ts-dst-host:
+    description: Tailscale IP/hostname of the Tailscale host you want to connect to or use as a bastion host.
+    type: string
+
+steps:
+  - run:
+      shell: bash
+      environment:
+        TS_DST_HOST: << parameters.ts-dst-host >>
+      name: Connecting to Tailscale
+      command: <<include(scripts/connect.sh)>>
