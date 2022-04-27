@@ -17,7 +17,7 @@ install() {
       PLATFORM=macOS
       EXECUTOR=macos
       ;;
-    msys*|MSYS*|nt|win*|)
+    msys*|MSYS*|nt|win*)
       printf "Installing Tailscale for Windows\n\n"
       choco install tailscale
       PLATFORM=Windows
