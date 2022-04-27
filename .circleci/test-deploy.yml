@@ -2,26 +2,37 @@ version: 2.1
 orbs:
   tailscale: orbiously/tailscale@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
+  win: circleci/windows@4.1.1
 
 filters: &filters
   tags:
     only: /.*/
 
 jobs:
-    # Create a job to test the commands of your orbs.
-    # You may want to add additional validation steps to ensure the commands are working as expected.
-    command-tests:
-      docker:
-        - image: cimg/base:current
-      steps:
-        - checkout
-        # Run your orb's commands to validate them.
-        - tailscale/greet
+  command-tests-linux:
+    machine:
+      image: ubuntu-2004:202201-02
+    steps:
+      - tailscale/install
+  command-tests-macos:
+    macos:
+      xcode: "13.2.0"
+    steps:
+      - tailscale/install
+  command-tests-windows:
+    executor:
+      name: win/default
+    steps:
+      - tailscale/install
 workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      - command-tests:
+      - command-tests-linux:
+          filters: *filters
+      - command-tests-macos:
+          filters: *filters
+      - command-tests-windows:
           filters: *filters
       - orb-tools/pack:
           filters: *filters
@@ -31,7 +42,9 @@ workflows:
           pub-type: production
           requires:
             - orb-tools/pack
-            - command-tests
+            - command-tests-linux
+            - command-tests-macos
+            - command-tests-windows
           context: orb-publishing
           filters:
             branches:
