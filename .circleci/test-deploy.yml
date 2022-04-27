@@ -14,16 +14,25 @@ jobs:
       image: ubuntu-2004:202201-02
     steps:
       - tailscale/install
+      - tailscale/connect:
+          ts-dst-host: "jumper"
+       - tailscale/disconnect
   command-tests-macos:
     macos:
       xcode: "13.2.0"
     steps:
       - tailscale/install
+      - tailscale/connect:
+          ts-dst-host: "jumper"
+       - tailscale/disconnect
   command-tests-windows:
     executor:
       name: win/default
     steps:
       - tailscale/install
+      - tailscale/connect:
+          ts-dst-host: "jumper"
+       - tailscale/disconnect
 workflows:
   test-deploy:
     jobs:
