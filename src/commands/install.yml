@@ -1,0 +1,8 @@
+description: >
+  This command installs Tailscale
+# What will this command do?
+# Descriptions should be short, simple, and clear.
+steps:
+  - run:
+      name: Installing Tailscale
+      command: <<include(scripts/install.sh)>>
