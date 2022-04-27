@@ -4,6 +4,6 @@ description: >
 # Descriptions should be short, simple, and clear.
 steps:
   - run:
-      sshell: bash
+      shell: bash
       name: Installing Tailscale
       command: <<include(scripts/install.sh)>>
