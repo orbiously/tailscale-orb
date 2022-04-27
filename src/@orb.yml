@@ -5,6 +5,6 @@ description: >
   You can then use that other Tailscale host as a bastion host.
 
 display:
-  home_url: "https://www.github.com/orbiously/tailscale-orb"
-  source_url: "https://www.github.com/orbiously/tailscale-orb"
+  home_url: "https://github.com/orbiously/tailscale-orb"
+  source_url: "https://github.com/orbiously/tailscale-orb"
 
