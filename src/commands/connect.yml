@@ -13,4 +13,3 @@ steps:
         TS_DST_HOST: << parameters.ts-dst-host >>
       name: Connecting to Tailscale
       command: <<include(scripts/connect.sh)>>
- 
