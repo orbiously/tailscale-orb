@@ -1,19 +1,12 @@
 description: >
   Use this command to connect to your Tailnet and confirm reachability of your Tailscale destination host.
 
-commands:
-  comm-ception:
-    description: Command inception
-    steps:
-      - run: echo "I'm a command in a command"
-
 parameters:
   ts-dst-host:
     description: Tailscale IP/hostname of the Tailscale host you want to connect to or use as a bastion host.
     type: string
 
 steps:
-  - comm-ception
   - run:
       shell: bash
       environment:
