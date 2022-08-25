@@ -1,5 +1,18 @@
 #!/bin/bash
 case $EXECUTOR in
+
+  docker)
+    tailscale --socket=/tmp/tailscaled.sock up --authkey="${!TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
+                    
+    if ( tailscale --socket=/tmp/tailscaled.sock status | grep "$TS_DST_HOST" | grep "offline" ); then
+      printf "\nTailscale jump-host is offline\n"
+      printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
+      printf "\nFailing the build\n"
+      exit 1
+    fi
+    
+    tailscale --socket=/tmp/tailscaled.sock ping jumper
+    ;;
   macos)
 cat << EOF | sudo tee /Library/LaunchDaemons/com.tailscale.tailscaled.plist 1>/dev/null
 <?xml version="1.0" encoding="UTF-8"?>

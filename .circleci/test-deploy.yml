@@ -9,6 +9,15 @@ filters: &filters
     only: /.*/
 
 jobs:
+  command-tests-docker:
+    docker:
+      - image: cimg/base:2022.03
+    steps:
+      - tailscale/install
+      - tailscale/connect:
+          ts-dst-host: "jumper"
+          ts-auth-key: TS_KEY
+      - tailscale/disconnect
   command-tests-linux:
     machine:
       image: ubuntu-2004:202201-02
@@ -16,7 +25,7 @@ jobs:
       - tailscale/install
       - tailscale/connect:
           ts-dst-host: "jumper"
-          ts-auth-key: TS_LA_KEY
+          ts-auth-key: TS_KEY
       - tailscale/disconnect
   command-tests-macos:
     macos:
@@ -38,6 +47,8 @@ workflows:
   test-deploy:
     jobs:
       # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
+      - command-tests-docker:
+          filters: *filters      
       - command-tests-linux:
           filters: *filters
 #       - command-tests-macos:

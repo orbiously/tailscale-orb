@@ -12,6 +12,11 @@ parameters:
 
 steps:
   - run:
+      name: Checking if daemon is needed
+      command: <<include(scripts/tailscaled.sh)>>
+      background: true
+
+  - run:
       shell: bash
       environment:
         TS_DST_HOST: << parameters.ts-dst-host >>
