@@ -1,5 +1,5 @@
 #!/bin/bash
-printf "Executor is $EXECUTOR.\n"
+printf "Executor is %s.\n" "$EXECUTOR"
 case $EXECUTOR in
   linux|windows|macos)
     echo " > Nothing to do"
