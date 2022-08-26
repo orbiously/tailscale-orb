@@ -1,10 +1,19 @@
 #!/bin/bash
-set -o nounset
+
+PARAM_TS_AUTH_KEY=$(eval echo "\$$PARAM_TS_AUTH_KEY")
+
+if [ -z "$PARAM_TS_AUTH_KEY" ]; then 
+    echo "The environment variable you specified for the Tailscale authentication key ($PARAM_TS_AUTH_KEY) is not set.
+    echo "Did you declare an environment variable that contains the Tailscale authentication key?"
+    echo "Are you referencing the correct name?"
+    echo "Did you declare the environment varible in an organization context? If so, did you specify the context name in the workflow?"
+    exit 1
+fi
 
 case $EXECUTOR in
 
   docker)
-    tailscale --socket=/tmp/tailscaled.sock up --authkey="${!TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
+    tailscale --socket=/tmp/tailscaled.sock up --authkey="${!PARAM_TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
 
     tailscale_status=("tailscale" "--socket=/tmp/tailscaled.sock" "status")                
     
@@ -33,17 +42,17 @@ EOF
     sudo launchctl load /Library/LaunchDaemons/com.tailscale.tailscaled.plist
     sudo launchctl start com.tailscale.tailscaled
     
-    tailscale up --authkey "${!TS_AUTH_KEY}}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
+    tailscale up --authkey "${!PARAM_TS_AUTH_KEY}}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
     tailscale_status=(tailscale status)
     tailscale_ping=(tailscale ping)
     ;;
   linux)
-    sudo tailscale up --authkey="${!TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
+    sudo tailscale up --authkey="${!PARAM_TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
     tailscale_status=(tailscale status)
     tailscale_ping=(tailscale ping)
     ;;
   windows)
-    /c/PROGRA~2/"Tailscale IPN"/tailscale.exe up --authkey="${!TS_AUTH_KEY}}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
+    /c/PROGRA~2/"Tailscale IPN"/tailscale.exe up --authkey="${!PARAM_TS_AUTH_KEY}}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
     tailscale_status=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe status)
     tailscale_ping=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe ping)
     ;;
@@ -56,4 +65,4 @@ if ( "${tailscale_status[@]}"  | grep jumper | grep "offline" ); then
   exit 1
 fi
 
-"${tailscale_ping[@]}" "$TS_DST_HOST"
+"${tailscale_ping[@]}" "$PARAM_TS_DST_HOST"
