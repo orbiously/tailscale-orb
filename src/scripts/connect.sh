@@ -3,7 +3,7 @@
 PARAM_TS_AUTH_KEY=$(eval echo "\$$PARAM_TS_AUTH_KEY")
 
 if [ -z "$PARAM_TS_AUTH_KEY" ]; then 
-    echo "The environment variable you specified for the Tailscale authentication key ($PARAM_TS_AUTH_KEY) is not set.
+    echo "The environment variable you specified for the Tailscale authentication key ($PARAM_TS_AUTH_KEY) is not set."
     echo "Did you declare an environment variable that contains the Tailscale authentication key?"
     echo "Are you referencing the correct name?"
     echo "Did you declare the environment varible in an organization context? If so, did you specify the context name in the workflow?"
