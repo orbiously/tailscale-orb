@@ -65,4 +65,4 @@ if ( "${tailscale_status[@]}"  | grep jumper | grep "offline" ); then
   exit 1
 fi
 
-"${tailscale_ping[@]}" "$PARAM_TS_DST_HOST"
+"${tailscale_ping[@]}" "$TS_DST_HOST"
