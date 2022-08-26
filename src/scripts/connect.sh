@@ -3,15 +3,10 @@ case $EXECUTOR in
 
   docker)
     tailscale --socket=/tmp/tailscaled.sock up --authkey="${!TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
-                    
-    if ( tailscale --socket=/tmp/tailscaled.sock status | grep "$TS_DST_HOST" | grep "offline" ); then
-      printf "\nTailscale jump-host is offline\n"
-      printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
-      printf "\nFailing the build\n"
-      exit 1
-    fi
+
+    remote_tailscale_host_check=(tailscale --socket=/tmp/tailscaled.sock status | grep jumper | grep "offline")                
     
-    tailscale --socket=/tmp/tailscaled.sock ping jumper
+    ping_remote_tailscale_host=(tailscale --socket=/tmp/tailscaled.sock ping "$TS_DST_HOST")
     ;;
   macos)
 cat << EOF | sudo tee /Library/LaunchDaemons/com.tailscale.tailscaled.plist 1>/dev/null
@@ -37,14 +32,26 @@ EOF
     sudo launchctl start com.tailscale.tailscaled
     
     tailscale up --authkey "${!TS_AUTH_KEY}}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
-    tailscale ping "$TS_DST_HOST"
+    remote_tailscale_host_check=(tailscale status | grep jumper | grep "offline")
+    ping_remote_tailscale_host=(tailscale ping "$TS_DST_HOST")
     ;;
   linux)
     sudo tailscale up --authkey="${!TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
-    tailscale ping "$TS_DST_HOST"
+    remote_tailscale_host_check=(tailscale status | grep jumper | grep "offline")
+    ping_remote_tailscale_host=(tailscale ping "$TS_DST_HOST")
     ;;
   windows)
     /c/PROGRA~2/"Tailscale IPN"/tailscale.exe up --authkey="${!TS_AUTH_KEY}}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
-    /c/PROGRA~2/"Tailscale IPN"/tailscale.exe ping "$TS_DST_HOST"
+    remote_tailscale_host_check=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe status | grep jumper | grep "offline")
+    ping_remote_tailscale_host=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe ping "$TS_DST_HOST")
     ;;
 esac
+
+if ( "$remote_tailscale_check[@]}" ); then
+  printf "\nRemote Tailscal host is offline\n"
+  printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
+  printf "\nFailing the build\n"
+  exit 1
+fi
+
+$ping_remote_tailscale_host[@]}
