@@ -19,7 +19,7 @@ steps:
   - run:
       shell: bash
       environment:
-        TS_DST_HOST: << parameters.ts-dst-host >>
+        PARAM_TS_DST_HOST: << parameters.ts-dst-host >>
         PARAM_TS_AUTH_KEY: << parameters.ts-auth-key >>
       name: Connecting to Tailscale
       command: <<include(scripts/connect.sh)>>

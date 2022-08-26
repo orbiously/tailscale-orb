@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#PARAM_TS_AUTH_KEY=$(eval echo "\$$PARAM_TS_AUTH_KEY")
+PARAM_TS_AUTH_KEY=$(eval echo "\$$PARAM_TS_AUTH_KEY")
 
 if [ -z "$PARAM_TS_AUTH_KEY" ]; then 
     echo "The environment variable you specified for the Tailscale authentication key ($PARAM_TS_AUTH_KEY) is not set."
@@ -65,4 +65,4 @@ if ( "${tailscale_status[@]}"  | grep jumper | grep "offline" ); then
   exit 1
 fi
 
-"${tailscale_ping[@]}" "$TS_DST_HOST"
+"${tailscale_ping[@]}" "$PARAM_TS_DST_HOST"
