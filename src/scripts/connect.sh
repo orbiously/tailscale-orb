@@ -3,7 +3,7 @@
 PARAM_TS_AUTH_KEY=$(eval echo "\$$PARAM_TS_AUTH_KEY")
 
 if [ -z "$PARAM_TS_AUTH_KEY" ]; then 
-    echo "The environment variable you specified for the Tailscale authentication key ($PARAM_TS_AUTH_KEY) is not set."
+    echo "The environment variable you specified for the Tailscale authentication key (${PARAM_TS_AUTH_KEY}) is not set."
     echo "Did you declare an environment variable that contains the Tailscale authentication key?"
     echo "Are you referencing the correct name?"
     echo "Did you declare the environment varible in an organization context? If so, did you specify the context name in the workflow?"
@@ -42,7 +42,7 @@ EOF
     sudo launchctl load /Library/LaunchDaemons/com.tailscale.tailscaled.plist
     sudo launchctl start com.tailscale.tailscaled
     
-    tailscale up --authkey "${!PARAM_TS_AUTH_KEY}}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
+    tailscale up --authkey "${!PARAM_TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
     tailscale_status=(tailscale status)
     tailscale_ping=(tailscale ping)
     ;;
@@ -52,7 +52,7 @@ EOF
     tailscale_ping=(tailscale ping)
     ;;
   windows)
-    /c/PROGRA~2/"Tailscale IPN"/tailscale.exe up --authkey="${!PARAM_TS_AUTH_KEY}}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
+    /c/PROGRA~2/"Tailscale IPN"/tailscale.exe up --authkey="${!PARAM_TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
     tailscale_status=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe status)
     tailscale_ping=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe ping)
     ;;
