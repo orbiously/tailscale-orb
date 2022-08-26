@@ -1,4 +1,6 @@
 #!/bin/bash
+set -o nounset
+
 case $EXECUTOR in
 
   docker)
