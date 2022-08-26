@@ -47,11 +47,11 @@ EOF
     ;;
 esac
 
-if ( "$remote_tailscale_host_check[@]}" ); then
+if ( "${remote_tailscale_host_check[@]}" ); then
   printf "\nRemote Tailscal host is offline\n"
   printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
   printf "\nFailing the build\n"
   exit 1
 fi
 
-"$ping_remote_tailscale_host[@]}"
+"${ping_remote_tailscale_host[@]}"
