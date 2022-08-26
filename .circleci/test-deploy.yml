@@ -16,7 +16,7 @@ jobs:
       - tailscale/install
       - tailscale/connect:
           ts-dst-host: "jumper"
-          ts-auth-key: TS_KEY
+          ts-auth-key: TS_LA_KEY
       - tailscale/disconnect
   command-tests-linux:
     machine:
