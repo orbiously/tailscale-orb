@@ -4,7 +4,7 @@ case $EXECUTOR in
   docker)
     tailscale --socket=/tmp/tailscaled.sock up --authkey="${!TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
 
-    remote_tailscale_host_check=(tailscale '--socket=/tmp/tailscaled.sock' status)                
+    remote_tailscale_host_check=(tailscale --socket\=/tmp/tailscaled.sock status)                
     
     ping_remote_tailscale_host=(tailscale '--socket=/tmp/tailscaled.sock')
     ;;
