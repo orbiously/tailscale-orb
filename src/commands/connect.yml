@@ -11,10 +11,10 @@ parameters:
     default: TS_KEY
 
 steps:
-  - run:
-      name: Checking if daemon is needed
-      command: <<include(scripts/tailscaled.sh)>>
-      background: true
+  # - run:
+  #     name: Checking if daemon is needed
+  #     command: <<include(scripts/tailscaled.sh)>>
+  #     background: true
 
   - run:
       shell: bash

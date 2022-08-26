@@ -3,6 +3,7 @@ install() {
     case $1 in
     [Ll]inux*)
       if [ -f /.dockerenv ]; then
+        sudo apt-get update && sudo apt-get install -y tmux
         EXECUTOR=docker
       else
         EXECUTOR=linux
