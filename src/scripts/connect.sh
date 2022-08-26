@@ -1,8 +1,6 @@
 #!/bin/bash
 
-PARAM_TS_AUTH_KEY=$(eval echo "\$$PARAM_TS_AUTH_KEY")
-
-if [ -z "$PARAM_TS_AUTH_KEY" ]; then 
+if [ -z "${!PARAM_TS_AUTH_KEY}" ]; then 
     echo "The environment variable you specified for the Tailscale authentication key (${PARAM_TS_AUTH_KEY}) is not set."
     echo "Did you declare an environment variable that contains the Tailscale authentication key?"
     echo "Are you referencing the correct name?"
