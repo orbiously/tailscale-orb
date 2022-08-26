@@ -50,7 +50,7 @@ EOF
 esac
 
 if ( "${tailscale_status[@]}"  | grep jumper | grep "offline" ); then
-  printf "\nRemote Tailscal host is offline\n"
+  printf "\nRemote Tailscale host is offline\n"
   printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
   printf "\nFailing the build\n"
   exit 1
