@@ -3,15 +3,15 @@
 if [ -z "${!PARAM_TS_AUTH_KEY}" ]; then 
     printf "The environment variable you specified for the Tailscale authentication key (%s) is not set.\n" ${PARAM_TS_AUTH_KEY}
     echo "- Did you declare an environment variable that contains the Tailscale authentication key?"
-    echo "- Are you referencing the correct name?"
-    echo "- Did you declare the environment varible in an organization context? If so, did you specify the context name in the workflow?"
+    echo "- Are you referencing the correct environment variable name?"
+    echo "- Did you declare the environment variable in an organization context? If so, did you specify the context name in the workflow?"
     exit 1
 fi
 
 case $EXECUTOR in
 
   docker)
-    tmux new-session -d -s "myTempSession" tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:1054 --socks5-server=localhost:1055 --socket=/tmp/tailscaled.sock 1>/dev/null 2>/tmp/tailscaled.log
+    tmux new-session -d -s "TempSession" tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:1054 --socks5-server=localhost:1055 --socket=/tmp/tailscaled.sock 1>/dev/null 2>/tmp/tailscaled.log
 
     tailscale --socket=/tmp/tailscaled.sock up --authkey="${!PARAM_TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes
 

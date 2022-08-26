@@ -30,6 +30,6 @@ install() {
 install "$(uname)"
 
 printf "\nTailscale for %s installed\n\n" "$PLATFORM"
-printf "\nPublic IP before VPN connection is %s\n" "$(curl http://checkip.amazonaws.com)"
+printf "\nPublic IP is %s\n" "$(curl http://checkip.amazonaws.com)"
 echo "export PLATFORM=$PLATFORM" >> $BASH_ENV
 echo "export EXECUTOR=$EXECUTOR" >> $BASH_ENV
