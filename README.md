@@ -4,7 +4,7 @@
 [![CircleCI Build Status](https://circleci.com/gh/orbiously/tailscale-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/orbiously/tailscale-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/orbiously/tailscale.svg)](https://circleci.com/orbs/registry/orb/orbiously/tailscale) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/orbiously/tailscale-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 
-This orb will allow users to connect the build host to a [Tailscale Tailnet](https://tailscale.com/kb/1151/what-is-tailscale/). The build host will then be able to communicate _privately_ with any Tailscale host in the same Tailnet via a peer-to-peer mesh network.
+This orb will allow users to connect the build-host to a [Tailscale Tailnet](https://tailscale.com/kb/1151/what-is-tailscale/). The build-host will then be able to communicate _privately_ with any Tailscale host in the same Tailnet via a peer-to-peer mesh network.
 
 You can then also use the remote Tailscale host as a bastion/jump host.
 
