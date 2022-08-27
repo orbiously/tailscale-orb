@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Disconnecting from Tailscale..."
 case $EXECUTOR in
   macos)
     tailscale down

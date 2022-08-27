@@ -64,6 +64,8 @@ EOF
     ;;
 esac
 
+echo "Connecting to Tailscale..."
+
 if (! "${tailscale_connect[@]}" ); then
   printf "\nEither:\n - The Tailscale auth key stored in the %s environment variable is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)" "${PARAM_TS_AUTH_KEY}"
   exit 1
