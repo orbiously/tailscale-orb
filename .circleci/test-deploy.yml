@@ -49,8 +49,8 @@ jobs:
 workflows:
   test-deploy:
     jobs:
-      - command-tests-docker:
-          filters: *filters      
+      # - command-tests-docker:
+      #     filters: *filters      
       - command-tests-linux:
           filters: *filters
       # - command-tests-macos:
@@ -68,7 +68,7 @@ workflows:
             - command-tests-linux
             # - command-tests-macos
             # - command-tests-windows
-            - command-tests-docker
+            # - command-tests-docker
           context: orb-publishing
           filters:
             branches:

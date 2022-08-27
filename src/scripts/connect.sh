@@ -63,7 +63,7 @@ EOF
     #   exit 1
     # fi
     
-    tailscale_connect=("sudo tailscale" "up" "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" "--accept-routes")
+    tailscale_connect=(sudo tailscale up "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes)
 
     tailscale_status=(tailscale status)
     tailscale_ping=(tailscale ping)
