@@ -44,7 +44,7 @@ jobs:
       - tailscale/install
       - tailscale/connect:
           ts-dst-host: "100.100.186.65"
-          # ts-auth-key: TS_LA_KEY
+          ts-auth-key: TS_LA_KEY
       - tailscale/disconnect
 workflows:
   test-deploy:
@@ -53,8 +53,8 @@ workflows:
       #     filters: *filters      
       # - command-tests-linux:
       #     filters: *filters
-      # - command-tests-macos:
-      #     filters: *filters
+      - command-tests-macos:
+          filters: *filters
       - command-tests-windows:
           filters: *filters
       - orb-tools/pack:
@@ -66,7 +66,7 @@ workflows:
           requires:
             - orb-tools/pack
             # - command-tests-linux
-            # - command-tests-macos
+            - command-tests-macos
             - command-tests-windows
             # - command-tests-docker
           context: orb-publishing
