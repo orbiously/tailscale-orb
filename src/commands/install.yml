@@ -1,7 +1,6 @@
 description: >
-  This command installs Tailscale
-# What will this command do?
-# Descriptions should be short, simple, and clear.
+  Use this command to install Tailscale (note: if the job uses the Docker executor, this command will also install tmux)
+
 steps:
   - run:
       shell: bash
