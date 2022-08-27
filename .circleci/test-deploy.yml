@@ -51,8 +51,8 @@ workflows:
     jobs:
       - command-tests-docker:
           filters: *filters      
-      # - command-tests-linux:
-      #     filters: *filters
+      - command-tests-linux:
+          filters: *filters
       # - command-tests-macos:
       #     filters: *filters
       # - command-tests-windows:
@@ -65,7 +65,7 @@ workflows:
           pub-type: production
           requires:
             - orb-tools/pack
-            # - command-tests-linux
+            - command-tests-linux
             # - command-tests-macos
             # - command-tests-windows
             - command-tests-docker
