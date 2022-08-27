@@ -12,6 +12,7 @@ jobs:
   command-tests-docker:
     docker:
       - image: cimg/base:2022.03
+    resource_class: small
     steps:
       - tailscale/install
       - tailscale/connect:
@@ -21,6 +22,7 @@ jobs:
   command-tests-linux:
     machine:
       image: ubuntu-2004:202201-02
+    resource_class: medium
     steps:
       - tailscale/install
       - tailscale/connect:
