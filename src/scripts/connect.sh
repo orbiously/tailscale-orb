@@ -57,11 +57,6 @@ EOF
     tailscale_ping=(tailscale ping)
     ;;
   windows)
-    # if (! /c/PROGRA~2/"Tailscale IPN"/tailscale.exe up --authkey="${!PARAM_TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes); then
-    #   printf "\nEither:\n - The Tailscale auth key you're using is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)"
-    #   exit 1
-    # fi
-
     tailscale_connect=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe up "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes)
 
     tailscale_status=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe status)
