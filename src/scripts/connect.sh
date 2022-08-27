@@ -65,6 +65,7 @@ esac
 
 if (! "${tailscale_connect[@]}"); then
   printf "Either:\n - The Tailscale auth key you're using is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled" and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)"
+fi
 
 if ( "${tailscale_status[@]}"  | grep jumper | grep "offline" ); then
   printf "\nRemote Tailscale host is offline\n"
