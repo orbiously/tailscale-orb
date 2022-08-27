@@ -58,7 +58,7 @@ EOF
     tailscale_ping=(tailscale ping)
     ;;
   linux)
-    if (! tailscale up --authkey="${!PARAM_TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes); then
+    if (! sudo tailscale up --authkey="${!PARAM_TS_AUTH_KEY}" --hostname="$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes); then
       printf "Either:\n - The Tailscale auth key you're using is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)"
       exit 1
     fi
@@ -82,7 +82,7 @@ EOF
 esac
 
 # if (! "${tailscale_connect[@]}" ); then
-#   printf "Either:\n - The Tailscale auth key you're using is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)"
+#   printf "\nEither:\n - The Tailscale auth key you're using is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)"
 #   exit 1
 # fi
 
