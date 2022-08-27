@@ -65,9 +65,9 @@ workflows:
           pub-type: production
           requires:
             - orb-tools/pack
-            - command-tests-linux
-            - command-tests-macos
-            - command-tests-windows
+            # - command-tests-linux
+            # - command-tests-macos
+            # - command-tests-windows
             - command-tests-docker
           context: orb-publishing
           filters:
