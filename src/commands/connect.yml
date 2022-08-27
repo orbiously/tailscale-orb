@@ -8,7 +8,7 @@ parameters:
   ts-auth-key:
     description: Name of the environment variable containing the Tailscale authentication key.
     type: env_var_name
-    default: TS_KEY
+    default: TS_AUTH_KEY
 
 steps:
   - run:
