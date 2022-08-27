@@ -85,7 +85,7 @@ EOF
 esac
 
 if (! "${tailscale_connect[@]}" ); then
-  printf "\nEither:\n - The Tailscale auth key stored in the ${PARAM_TS_AUTH_KEY} environment variable is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)"
+  printf "\nEither:\n - The Tailscale auth key stored in the %s environment variable is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)" "${PARAM_TS_AUTH_KEY}"
   exit 1
 fi
 
@@ -96,7 +96,7 @@ if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST" ); then
     exit 1
   fi
 else
-  printf "\nThere is no machine with hostname/IP matching $PARAM_TS_DST_HOST in your Tailnet\n"
+  printf "\nThere is no machine with hostname/IP matching %s in your Tailnet\n" "$PARAM_TS_DST_HOST"
   printf "\nMake sure to reference the correct Tailscale hostname/IP in the ts-dst-host parameter\n"
   exit 1
 fi
