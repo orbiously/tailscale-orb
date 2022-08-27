@@ -44,7 +44,7 @@ jobs:
       - tailscale/install
       - tailscale/connect:
           ts-dst-host: "100.100.186.65"
-          ts-auth-key: TS_LA_KEY
+          # ts-auth-key: TS_LA_KEY
       - tailscale/disconnect
 workflows:
   test-deploy:

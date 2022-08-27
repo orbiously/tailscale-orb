@@ -3,7 +3,7 @@
 if [ -z "${!PARAM_TS_AUTH_KEY}" ]; then 
     printf "The environment variable that is supposed to contain the Tailscale authentication key is not set.\n"
     echo "- Did you store the Tailscale authentication key in an evironment variable named ${PARAM_TS_AUTH_KEY}?"
-    echo "- In case you stored the Tailscale authentication key in an environment variable with different name than TS_AUTH_KEY, did you specify that custom name via the ts-auth-key parameter?"
+    echo "- In case you stored the Tailscale authentication key in an environment variable with a different name than TS_AUTH_KEY, did you specify that custom name via the ts-auth-key parameter?"
     echo "- Is the environment variable delared in an organization context? If so, did you specify the context name in the workflow?"
     exit 1
 fi
