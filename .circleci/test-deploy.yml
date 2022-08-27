@@ -57,8 +57,8 @@ workflows:
       #     filters: *filters
       # - command-tests-windows:
       #     filters: *filters
-      # - orb-tools/pack:
-      #     filters: *filters
+      - orb-tools/pack:
+          filters: *filters
       - orb-tools/publish:
           orb-name: orbiously/tailscale
           vcs-type: << pipeline.project.type >>

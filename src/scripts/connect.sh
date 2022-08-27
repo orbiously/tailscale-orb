@@ -86,7 +86,7 @@ if (! "${tailscale_connect[@]}" ); then
   exit 1
 fi
 
-if ( "${tailscale_status[@]}"  | grep jumper | grep "offline" ); then
+if ( "${tailscale_status[@]}" | grep jumper | grep "offline" ); then
   printf "\nRemote Tailscale host is offline\n"
   printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
   exit 1
