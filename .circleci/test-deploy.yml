@@ -16,7 +16,7 @@ jobs:
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "jumper"
+          ts-dst-host: "jumpy"
           ts-auth-key: TS_AUTH_KEY
       - tailscale/disconnect
   command-tests-linux:
@@ -49,14 +49,14 @@ jobs:
 workflows:
   test-deploy:
     jobs:
-      # - command-tests-docker:
-      #     filters: *filters      
+      - command-tests-docker:
+          filters: *filters      
       # - command-tests-linux:
       #     filters: *filters
-      - command-tests-macos:
-          filters: *filters
-      - command-tests-windows:
-          filters: *filters
+      # - command-tests-macos:
+      #     filters: *filters
+      # - command-tests-windows:
+      #     filters: *filters
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
@@ -66,9 +66,9 @@ workflows:
           requires:
             - orb-tools/pack
             # - command-tests-linux
-            - command-tests-macos
-            - command-tests-windows
-            # - command-tests-docker
+            # - command-tests-macos
+            # - command-tests-windows
+            - command-tests-docker
           context: orb-publishing
           filters:
             branches:
