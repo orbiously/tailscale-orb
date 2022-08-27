@@ -1,13 +1,13 @@
 #!/bin/bash
 
 if [ -z "${!PARAM_TS_AUTH_KEY}" ]; then 
-    printf "The environment variable that is supposed to contain the Tailscale auth key is not set:\n"
+    printf "The environment variable that is supposed to contain the Tailscale auth key is not set or accessible:\n"
     if [ "${PARAM_TS_AUTH_KEY}" != "TS_AUTH_KEY" ]; then
-      echo "- Make sure to store the Tailscale auth key in an environment variable named ${PARAM_TS_AUTH_KEY}"
+      echo "- Make sure to store the Tailscale auth key in an environment variable named ${PARAM_TS_AUTH_KEY}."
     else
-      echo "- In case you stored the Tailscale auth key in an environment variable with a different name than TS_AUTH_KEY, you need to specify that custom name via the \"ts-auth-key parameter\""
+      echo "- In case you stored the Tailscale auth key in an environment variable with a different name than TS_AUTH_KEY, you need to specify that custom name via the \"ts-auth-key parameter\"."
     fi
-    echo "- If the environment variable ${PARAM_TS_AUTH_KEY} is delared in an organization context, the context name must be referenced in the workflow"
+    echo "- If the environment variable ${PARAM_TS_AUTH_KEY} is delared in an organization context, the context name must be referenced in the workflow."
     exit 1
 fi
 
@@ -91,13 +91,13 @@ fi
 
 if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST" ); then
   if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST" | grep "offline" ); then
-    printf "\nRemote Tailscale host is offline\n"
+    printf "\nRemote Tailscale host %s is offline.\n" "$PARAM_TS_DST_HOST"
     printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
     exit 1
   fi
 else
   printf "\nThere is no machine with hostname/IP matching \"%s\" in your Tailnet\n" "$PARAM_TS_DST_HOST"
-  printf "\nMake sure to reference the correct Tailscale hostname/IP in the \"ts-dst-host\" parameter\n"
+  printf "Make sure to reference the correct Tailscale hostname/IP in the \"ts-dst-host\" parameter\n"
   exit 1
 fi
   
