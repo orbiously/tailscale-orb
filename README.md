@@ -17,7 +17,7 @@ You can then also use the remote Tailscale host as a bastion/jump host.
 
 - You need to have an existing [Tailnet](https://tailscale.com/kb/1136/tailnet/) with at least 1 **online** Tailscale machine
 - You **must** create a [Tailscale auth key](https://tailscale.com/kb/1085/auth-keys/) and store it in an environment variable (either in the [project settings](https://circleci.com/docs/env-vars#setting-an-environment-variable-in-a-project) or in an [organization context](https://circleci.com/docs/env-vars#setting-an-environment-variable-in-a-context)).
-_By default, the orb's `connect` command expects the Tailscale auth key to be stored in an environment variable named `TS_AUTH_KEY`, however you can opt to store the auth key in a custom-named environment variable; in such case, the environment variable's name **must be** passed to the orb's `connect` command via the `s-auth-key` parameter._
+_By default, the orb's `connect` command expects the Tailscale auth key to be stored in an environment variable named `TS_AUTH_KEY`, however you can opt to store the auth key in a custom-named environment variable; in such case, the environment variable's name **must be** passed to the orb's `connect` command via the `ts-auth-key` parameter._
 - If you wish to use one of the remote Tailscale host as a bastion/jump host, you will need to 
 
 ## Caveats & limitations
