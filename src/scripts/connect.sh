@@ -1,10 +1,13 @@
 #!/bin/bash
 
 if [ -z "${!PARAM_TS_AUTH_KEY}" ]; then 
-    printf "The environment variable that is supposed to contain the Tailscale authentication key is not set.\n"
-    echo "- Did you store the Tailscale authentication key in an evironment variable named ${PARAM_TS_AUTH_KEY}?"
-    echo "- In case you stored the Tailscale authentication key in an environment variable with a different name than TS_AUTH_KEY, did you specify that custom name via the ts-auth-key parameter?"
-    echo "- Is the environment variable delared in an organization context? If so, did you specify the context name in the workflow?"
+    printf "The environment variable that is supposed to contain the Tailscale auth key is not set:\n"
+    if ["${PARAM_TS_AUTH_KEY}" != "TS_AUTH_KEY"]; then
+      echo "- Make sure to store the Tailscale auth key in an environment variable named ${PARAM_TS_AUTH_KEY}"
+    else
+      echo "- In case you stored the Tailscale auth key in an environment variable with a different name than TS_AUTH_KEY, you need to specify that custom name via the ts-auth-key parameter"
+    fi
+    echo "- If the environment variable ${PARAM_TS_AUTH_KEY} is delared in an organization context, the context name must be referenced in the workflow"
     exit 1
 fi
 
@@ -82,14 +85,20 @@ EOF
 esac
 
 if (! "${tailscale_connect[@]}" ); then
-  printf "\nEither:\n - The Tailscale auth key you're using is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)"
+  printf "\nEither:\n - The Tailscale auth key stored in the ${PARAM_TS_AUTH_KEY} environment variable is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)"
   exit 1
 fi
 
-if ( "${tailscale_status[@]}" | grep jumper | grep "offline" ); then
-  printf "\nRemote Tailscale host is offline\n"
-  printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
+if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST" ); then
+  if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST" | grep "offline" ); then
+    printf "\nRemote Tailscale host is offline\n"
+    printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
+    exit 1
+  fi
+else
+  printf "\nThere is no machine with hostname/IP matching $PARAM_TS_DST_HOST in your Tailnet\n"
+  printf "\nMake sure to reference the correct Tailscale hostname/IP in the ts-dst-host parameter\n"
   exit 1
 fi
-
+  
 "${tailscale_ping[@]}" "$PARAM_TS_DST_HOST"
