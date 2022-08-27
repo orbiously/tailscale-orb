@@ -1,10 +1,10 @@
 version: 2.1
 
 description: >
-  Connect the build host to another host in your Tailnet.
-  You can then use that other Tailscale host as a bastion host.
+  Connect the build-host to your Tailnet and establish a link with another Tailscale host.
+  You can then use that remote Tailscale host as a bastion/jump host.
 
 display:
-  home_url: "https://github.com/orbiously/tailscale-orb"
+  home_url: "https://tailscale.com"
   source_url: "https://github.com/orbiously/tailscale-orb"
 
