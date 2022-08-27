@@ -6,7 +6,7 @@
 
 This orb will allow users to connect the build-host to a [Tailscale Tailnet](https://tailscale.com/kb/1151/what-is-tailscale/). The build-host will then be able to communicate _privately_ with any Tailscale host in the same Tailnet via a peer-to-peer mesh network.
 
-You can then also use the remote Tailscale host as a bastion/jump host.
+You can then also use the remote Tailscale host as a bastion/jump host to relay the traffic from your Tailscale network onto your physical subnet.
 
 **This is an “executor-agnostic” orb; there is only one set of commands which can be used on any executor. The orb’s underlying code handles the OS/platform detection, and runs the appropriate OS-specific bash commands.**
 
@@ -21,7 +21,7 @@ You can then also use the remote Tailscale host as a bastion/jump host.
     - Be mindful of the [type of auth key](https://tailscale.com/kb/1085/auth-keys/#types-of-auth-keys) you create.
     - By default, the orb's `connect` command expects the Tailscale auth key to be stored in an environment variable named `TS_AUTH_KEY`, however you can opt to store the auth key in a custom-named environment variable; in such case, the environment variable's name **must be** passed to the orb's `connect` command via the `ts-auth-key` parameter.
 
-- If you wish to use the remote Tailscale host as a bastion/jump host to relay the traffic from your Tailscale network onto your physical subnet:
+- If you wish to use the remote Tailscale host as a bastion/jump host:
     - You will need to [start (or restart) Tailscale as a subnet router](https://tailscale.com/kb/1019/subnets/) on that Tailscale host in order to expose the physical subnet route(s) to your target(s).
     - However, the orb won't allow you to use the remote Tailscale host an "exit node". (See "[Caveats & limitations](https://github.com/orbiously/tailscale-orb/edit/alpha/README.md#caveats--limitations)")
 
