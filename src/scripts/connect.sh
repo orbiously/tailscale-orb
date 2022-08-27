@@ -2,7 +2,7 @@
 
 if [ -z "${!PARAM_TS_AUTH_KEY}" ]; then 
     printf "The environment variable that is supposed to contain the Tailscale auth key is not set:\n"
-    if ["${PARAM_TS_AUTH_KEY}" != "TS_AUTH_KEY"]; then
+    if [ "${PARAM_TS_AUTH_KEY}" != "TS_AUTH_KEY" ]; then
       echo "- Make sure to store the Tailscale auth key in an environment variable named ${PARAM_TS_AUTH_KEY}"
     else
       echo "- In case you stored the Tailscale auth key in an environment variable with a different name than TS_AUTH_KEY, you need to specify that custom name via the ts-auth-key parameter"
