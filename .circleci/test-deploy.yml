@@ -17,7 +17,7 @@ jobs:
       - tailscale/install
       - tailscale/connect:
           ts-dst-host: "100.100.186.65"
-          ts-auth-key: TS_EPH
+          ts-auth-key: TS_AUTH_KEY
       - tailscale/disconnect
   command-tests-linux:
     machine:
