@@ -5,11 +5,12 @@ usage:
 
   orbs:
     tailscale: orbiously/tailscale@1.0.0
+    win: circleci/windows@5.0.0
 
   jobs:
     my-perfect-job:
-      machine:
-        image: ubuntu-2204:2022.04.1
+      executor:
+        name: win/default
 
       steps:
         - tailscale/install
