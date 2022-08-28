@@ -20,7 +20,7 @@ install() {
       ;;
     msys*|MSYS*|nt|win*)
       printf "Installing Tailscale for Windows\n\n"
-      choco install tailscale
+      choco install tailscale -y
       PLATFORM=Windows
       EXECUTOR=windows
       ;;
