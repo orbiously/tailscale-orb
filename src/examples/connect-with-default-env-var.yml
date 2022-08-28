@@ -8,17 +8,17 @@ usage:
 
   jobs:
     my-perfect-job:
-     docker:
-      - image: cimg/base:2022.08
-    resource_class: small
+      docker:
+        - image: cimg/base:2022.08
+      resource_class: small
 
-    steps:
-      - tailscale/install
-      - tailscale/connect:
-          ts-dst-host: "freddy"
-      - run: echo "Run some code here"
-      - tailscale/disconnect
-  workflows:
-    use-my-orb:
-      jobs:
-        - my-perfect-job
+      steps:
+        - tailscale/install
+        - tailscale/connect:
+            ts-dst-host: "freddy"
+        - run: echo "Run some code here"
+        - tailscale/disconnect
+workflows:
+  use-my-orb:
+    jobs:
+      - my-perfect-job
