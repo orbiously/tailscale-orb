@@ -15,7 +15,7 @@ usage:
       steps:
         - tailscale/install
         - tailscale/connect:
-            ts-dst-host: "freddy"
+            ts-dst-host: "freddy-fazbear"
         - run: echo "Run some code here"
         - tailscale/disconnect
 
