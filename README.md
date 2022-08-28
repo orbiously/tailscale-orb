@@ -66,9 +66,9 @@ The `disconnect` command will:
 
 ## Important note regarding support
 
-This is an [**uncertified** orb](https://circleci.com/docs/orbs-faq#using-uncertified-orbs); it is **neither tested nor verified by CircleCI**. Therefore CircleCI **will not** be in a position to assist you with using this orb, troubleshooting /resolving any issues you might encouter while using this orb.
+This is an [**uncertified** orb](https://circleci.com/docs/orbs-faq#using-uncertified-orbs); it is **neither tested nor verified by CircleCI**. Therefore CircleCI **will not** be in a position to assist you with using this orb, or troubleshooting /resolving any issues you might encouter while using this orb.
 
-Should you have questions or trouble using the orb, please:
+Should you have questions or encounter an issue while using this orb, please:
 
 1. Refer to the "[Caveats & limitations](https://github.com/orbiously/tailscale-orb/edit/alpha/README.md#caveats--limitations)" section.
 2. Check if there is a similar [existing question/issue](https://github.com/orbiously/tailscale-orb/issues). If so, you can add details about your instance of the issue.
