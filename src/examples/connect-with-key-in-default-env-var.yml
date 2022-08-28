@@ -16,7 +16,7 @@ usage:
             ts-dst-host: "freddy-fazbear"
         - run: echo "Run some code here"
         - tailscale/disconnect
-workflows:
-  use-my-orb:
-    jobs:
-      - my-perfect-job
+  workflows:
+    use-my-orb:
+      jobs:
+        - my-perfect-job
