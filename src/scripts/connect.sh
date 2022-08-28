@@ -79,7 +79,7 @@ fi
 
 printf "Connected to Tailscale.\n"
 
-printf "Attempting to establish direct link with host \"%s\" to Tailscale.\n\n" "$PARAM_TS_DST_HOST"
+printf "Attempting to establish direct link with host \"%s\"...\n\n" "$PARAM_TS_DST_HOST"
 
 if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST"  > /dev/null); then
   if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST" | grep "offline" ); then
