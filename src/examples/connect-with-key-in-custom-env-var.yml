@@ -24,11 +24,15 @@ usage:
             command: |
               echo "I <3 CircleCI" > my_file.txt
 
-              ### Now let's send the file using the `tailscale file` subcommand of the Tailscale CLI (https://tailscale.com/kb/1106/taildrop/#sending-files-with-taildrop).
+              ### Now let's send the file using the `tailscale file` subcommand of the Tailscale CLI
+              ### (https://tailscale.com/kb/1106/taildrop/#sending-files-with-taildrop).
 
               tailscale --socket=/tmp/tailscaled.sock file cp my_file.txt 100.121.112.23:
 
-              ### In the above command, the \"--socket=/tmp/tailscaled.sock\" flag is needed because to run Tailscale on Docker we leverage the userspace networking mode (https://tailscale.com/kb/1112/userspace-networking/), and the `connect` command of the orb starts `tailscaled` using this socket.
+              ### In the above command, the `--socket=/tmp/tailscaled.sock` flag is needed because to run Tailscale on Docker we leverage the userspace networking mode
+              ### (https://tailscale.com/kb/1112/userspace-networking/)
+              ### The `connect` command of the orb starts the `tailscaled` daemon with that specific socket (/tmp/tailscaled.sock).
+              ### Due to permission restrictions we can't use the default socket location (/var/run/tailscale/tailscaled.sock)
 
               echo "I bet there's now a file named `my_file.txt` stored on the host with Tailscale IP `100.121.112.23`"
 
