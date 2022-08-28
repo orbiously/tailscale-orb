@@ -9,7 +9,7 @@ usage:
   jobs:
     my-perfect-job:
      docker:
-      - image: cimg/base:2022.03
+      - image: cimg/base:2022.08
     resource_class: small
     steps:
       - tailscale/install
