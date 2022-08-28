@@ -1,0 +1,23 @@
+description: >
+  Connect to Tailscale using an auth key stored in the default environment variable.
+usage:
+  version: 2.1
+
+  orbs:
+    <orb-name>: orbiously/tailscale@1.0.0
+
+  jobs:
+    my-perfect-job:
+     docker:
+      - image: cimg/base:2022.03
+    resource_class: small
+    steps:
+      - tailscale/install
+      - tailscale/connect:
+          ts-dst-host: "freddy"
+      - run: echo "Run some code here"
+      - tailscale/disconnect
+  workflows:
+    use-my-orb:
+      jobs:
+        - my-perfect-job
