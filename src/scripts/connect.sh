@@ -16,7 +16,13 @@ case $EXECUTOR in
   docker)
     tmux new-session -d -s "TempSession" tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:1054 --socks5-server=localhost:1055 --socket=/tmp/tailscaled.sock 1>/dev/null 2>/tmp/tailscaled.log
 
-    tailscale_connect=("tailscale" "--socket=/tmp/tailscaled.sock" "up" "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" "--accept-routes")  
+    tailscale_connect=("tailscale" "--socket=/tmp/tailscaled.sock" "up" "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" "--accept-routes")
+
+    echo "export ALL_PROXY=socks5h://localhost:1055/" >> $BASH_ENV
+    echo "export HTTP_PROXY=http://localhost:1054/" >> $BASH_ENV
+    echo "export HTTPS_PROXY=http://localhost:1054/" >> $BASH_ENV
+    echo "export http_proxy=http://localhost:1054/" >> $BASH_ENV
+    echo "export https_proxy=http://localhost:1054/" >> $BASH_ENV
 
     tailscale_status=("tailscale" "--socket=/tmp/tailscaled.sock" "status")                
     
