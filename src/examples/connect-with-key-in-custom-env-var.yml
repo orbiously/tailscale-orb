@@ -28,7 +28,7 @@ usage:
               
               tailscale --socket=/tmp/tailscaled.sock file cp my_file.txt bonnie:
 
-              ### In the above command, the \"--socket=/tmp/tailscaled.sock\" flag is needed because to run Tailscale on Docker we use the userspace networking mode (https://tailscale.com/kb/1112/userspace-networking/), and the `connect` command of the orb starts `tailscaled` using this socket.
+              ### In the above command, the \"--socket=/tmp/tailscaled.sock\" flag is needed because to run Tailscale on Docker we leverage the userspace networking mode (https://tailscale.com/kb/1112/userspace-networking/), and the `connect` command of the orb starts `tailscaled` using this socket.
 
               echo "I bet there's now a file named `my_file.txt` stored on the host known as \"bonnie\" in my Tailnet"
               
