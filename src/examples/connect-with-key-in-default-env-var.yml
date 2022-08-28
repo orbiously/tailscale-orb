@@ -8,9 +8,8 @@ usage:
 
   jobs:
     my-perfect-job:
-      docker:
-        - image: cimg/base:2022.08
-      resource_class: small
+      machine:
+        image: ubuntu-2204:2022.04.1
 
       steps:
         - tailscale/install
@@ -18,6 +17,7 @@ usage:
             ts-dst-host: "freddy"
         - run: echo "Run some code here"
         - tailscale/disconnect
+
 workflows:
   use-my-orb:
     jobs:

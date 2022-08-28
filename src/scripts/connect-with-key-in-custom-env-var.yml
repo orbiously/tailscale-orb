@@ -1,0 +1,35 @@
+description: >
+  Connect to Tailscale using an auth key stored in a custom-named environment variable and send a file to the remote Tailscale host via Taildrop
+usage:
+  version: 2.1
+
+  orbs:
+    tailscale: orbiously/tailscale@1.0.0
+
+  jobs:
+    one-amazing-job:
+      docker:
+        - image: cimg/base:2022.08
+      resource_class: small
+
+      steps:
+        - tailscale/install
+
+        - tailscale/connect:
+            ts-dst-host: "bonnie"
+            ts-auth-key: MY_TS_KEY
+
+        - run:
+            name: Sending a file via Taildrop
+            command: |
+              echo "I <3 CircleCI" > my_file.txt
+              tailscale --socket=/tmp/tailscaled.sock file cp my_file.txt bonnie:
+              echo "The \"--socket=/tmp/tailscaled.sock\" flag is needed here because to run Tailscale on Docker we use the userspace networking mode (https://tailscale.com/kb/1112/userspace-networking/), and the `connect` command of the orb starts tailscaled using this socket. 
+              echo "I bet there's now a file named my_file.txt stored on the host known as \"bonnie\" in my Tailnet"
+              
+        - tailscale/disconnect
+
+workflows:
+  use-my-orb:
+    jobs:
+      - one-amazing-job
