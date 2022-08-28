@@ -4,13 +4,14 @@ usage:
   version: 2.1
 
   orbs:
-    <orb-name>: orbiously/tailscale@1.0.0
+    tailscale: orbiously/tailscale@1.0.0
 
   jobs:
     my-perfect-job:
      docker:
       - image: cimg/base:2022.08
     resource_class: small
+
     steps:
       - tailscale/install
       - tailscale/connect:
