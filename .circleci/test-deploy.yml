@@ -16,7 +16,7 @@ jobs:
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "jumper"
+          ts-dst-host: "100.100.186.65"
           ts-auth-key: TS_EPH
       - tailscale/disconnect
   command-tests-linux:
