@@ -70,14 +70,14 @@ EOF
     ;;
 esac
 
-echo "Connecting to Tailscale..."
+printf "Connecting to Tailscale...\n"
 
 if (! "${tailscale_connect[@]}" ); then
   printf "\nEither:\n - The Tailscale auth key stored in the %s environment variable is invalid\n or\n - The \"Device Authorization > Manually authorize new devices\" Tailnet setting is enabled and the Tailscale auth key is NOT pre-authorized (https://tailscale.com/kb/1099/device-authorization/)" "${PARAM_TS_AUTH_KEY}"
   exit 1
 fi
 
-if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST" ); then
+if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST"  > /dev/null); then
   if ( "${tailscale_status[@]}" | grep "$PARAM_TS_DST_HOST" | grep "offline" ); then
     printf "\nRemote Tailscale host %s is offline.\n" "$PARAM_TS_DST_HOST"
     printf "\nMake sure Tailscale is started on the remote host before attempting to run this job again\n"
