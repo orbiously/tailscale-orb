@@ -10,6 +10,8 @@ You can then also use the remote Tailscale host as a bastion/jump host to relay 
 
 **This is an “executor-agnostic” orb; there is only one set of commands which can be used on any executor. The orb’s underlying code handles the OS/platform detection, and runs the appropriate OS-specific bash commands.**
 
+This orb **supports all executors** (Docker,  Linux `machine`, macOS, and Windows).
+
 ---
 
 ## Requirements
