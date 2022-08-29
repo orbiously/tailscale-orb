@@ -4,7 +4,7 @@ case $EXECUTOR in
   macos)
     tailscale down
     ;;
-  linux)
+  linux|docker)
     sudo tailscale down
     ;;
   windows)
