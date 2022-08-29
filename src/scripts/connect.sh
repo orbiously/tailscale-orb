@@ -14,9 +14,9 @@ fi
 case $EXECUTOR in
 
   docker)
-    tmux new-session -d -s "TempSession" tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:1054 --socks5-server=localhost:1055 --socket=/tmp/tailscaled.sock 1>/dev/null 2>/tmp/tailscaled.log
+    tmux new-session -d -s "TempSession" sudo tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:1054 --socks5-server=localhost:1055 1>/dev/null 2>/tmp/tailscaled.log
 
-    tailscale_connect=("tailscale" "--socket=/tmp/tailscaled.sock" "up" "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" "--accept-routes")
+    tailscale_connect=(sudo tailscale up "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" "--accept-routes")
 
     echo "export ALL_PROXY=socks5h://localhost:1055/" >> $BASH_ENV
     echo "export HTTP_PROXY=http://localhost:1054/" >> $BASH_ENV
@@ -24,9 +24,9 @@ case $EXECUTOR in
     echo "export http_proxy=http://localhost:1054/" >> $BASH_ENV
     echo "export https_proxy=http://localhost:1054/" >> $BASH_ENV
 
-    tailscale_status=("tailscale" "--socket=/tmp/tailscaled.sock" "status")                
+    tailscale_status=(tailscale status)                
     
-    tailscale_ping=("tailscale" "--socket=/tmp/tailscaled.sock" "ping")
+    tailscale_ping=(tailscale ping)
     ;;
   macos)
 cat << EOF | sudo tee /Library/LaunchDaemons/com.tailscale.tailscaled.plist 1>/dev/null
