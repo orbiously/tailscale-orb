@@ -23,7 +23,7 @@ usage:
             name: Sending a file via Tailscale
             command: |
               echo "I <3 CircleCI" > my_file.txt
-              ## Now let's send the file using the `tailscale file` subcommand ## of the Tailscale CLI. (https://tailscale.com/kb/1080/cli/#file)
+              ### Now let's send the file using the `tailscale file` subcommand ### of the Tailscale CLI. (https://tailscale.com/kb/1080/cli/#file)
               sudo tailscale file cp my_file.txt 100.121.112.23:
               echo "I bet there's now a file named `my_file.txt` stored on the host with the Tailscale IP `100.121.112.23`"
 
