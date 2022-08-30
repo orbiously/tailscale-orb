@@ -2,26 +2,60 @@ version: 2.1
 orbs:
   tailscale: orbiously/tailscale@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
+  win: circleci/windows@4.1.1
 
 filters: &filters
   tags:
     only: /.*/
 
 jobs:
-    # Create a job to test the commands of your orbs.
-    # You may want to add additional validation steps to ensure the commands are working as expected.
-    command-tests:
-      docker:
-        - image: cimg/base:current
-      steps:
-        - checkout
-        # Run your orb's commands to validate them.
-        - tailscale/greet
+  command-tests-docker:
+    docker:
+      - image: cimg/base:2022.08
+    resource_class: small
+    steps:
+      - tailscale/install
+      - tailscale/connect:
+          ts-dst-host: "100.100.186.65"
+          ts-auth-key: TS_AUTH_KEY
+      - tailscale/disconnect
+  command-tests-linux:
+    machine:
+      image: ubuntu-2004:202201-02
+    resource_class: medium
+    steps:
+      - tailscale/install
+      - tailscale/connect:
+          ts-dst-host: "jumper"
+      - tailscale/disconnect
+  command-tests-macos:
+    macos:
+      xcode: "14.0.0"
+    steps:
+      - tailscale/install
+      - tailscale/connect:
+          ts-dst-host: "jumper"
+          ts-auth-key: TS_AUTH_KEY
+      - tailscale/disconnect
+  command-tests-windows:
+    executor:
+      name: win/default
+    steps:
+      - tailscale/install
+      - tailscale/connect:
+          ts-dst-host: "100.100.186.65"
+      - tailscale/disconnect
+
 workflows:
   test-deploy:
     jobs:
-      # Make sure to include "filters: *filters" in every test job you want to run as part of your deployment.
-      - command-tests:
+      - command-tests-docker:
+          filters: *filters      
+      - command-tests-linux:
+          filters: *filters
+      - command-tests-macos:
+          filters: *filters
+      - command-tests-windows:
           filters: *filters
       - orb-tools/pack:
           filters: *filters
@@ -31,7 +65,10 @@ workflows:
           pub-type: production
           requires:
             - orb-tools/pack
-            - command-tests
+            - command-tests-linux
+            - command-tests-macos
+            - command-tests-windows
+            - command-tests-docker
           context: orb-publishing
           filters:
             branches:

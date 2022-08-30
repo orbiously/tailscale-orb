@@ -1,0 +1,8 @@
+description: >
+  Use this command to install Tailscale (note: if the job uses the Docker executor, this command will also install tmux)
+
+steps:
+  - run:
+      shell: bash
+      name: Installing Tailscale
+      command: <<include(scripts/install.sh)>>

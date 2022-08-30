@@ -1,0 +1,35 @@
+description: >
+  Connect to Tailscale using an auth key stored in a custom-named environment variable and send a file to the remote Tailscale host via Taildrop
+usage:
+  version: 2.1
+
+  orbs:
+    tailscale: orbiously/tailscale@1.0.0
+
+  jobs:
+    one-amazing-job:
+      docker:
+        - image: cimg/base:2022.08
+      resource_class: small
+
+      steps:
+        - tailscale/install
+
+        - tailscale/connect:
+            ts-dst-host: "100.121.112.23"
+            ts-auth-key: MY_TS_KEY
+
+        - run:
+            name: Sending a file via Tailscale
+            command: |
+              echo "I <3 CircleCI" > my_file.txt
+              ### Now let's send the file using the `tailscale file` subcommand ### of the Tailscale CLI. (https://tailscale.com/kb/1080/cli/#file)
+              sudo tailscale file cp my_file.txt 100.121.112.23:
+              echo "I bet there's now a file named `my_file.txt` stored on the host with the Tailscale IP `100.121.112.23`"
+
+        - tailscale/disconnect
+
+  workflows:
+    use-my-orb:
+      jobs:
+        - one-amazing-job

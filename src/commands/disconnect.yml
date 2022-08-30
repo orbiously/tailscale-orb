@@ -1,0 +1,9 @@
+description: >
+  Use this command to disconnect connect from Tailscale.
+
+steps:
+  - run:
+      shell: bash
+      name: Disconnecting from Tailscale
+      command: <<include(scripts/disconnect.sh)>>
+      when: always

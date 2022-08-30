@@ -1,15 +1,11 @@
 version: 2.1
 
 description: >
-  Sample orb description
-# What will your orb allow users to accomplish?
-# Descriptions should be short, simple, and informative.
+  Connect the build-host to your Tailnet and establish a link with another Tailscale host.
+  You can then use that remote Tailscale host as a bastion/jump host.
+  This is an “executor-agnostic” orb; the commands work regrdless of the job's executor.
+  All executors (Docker,  Linux `machine`, macOS, and Windows) are supported.
 
-# This information will be displayed in the orb registry and is not mandatory.
 display:
-  home_url: "https://www.example.com/docs"
-  source_url: "https://www.github.com/orbiously/tailscale-orb"
-
-# If your orb requires other orbs, you can import them like this. Otherwise remove the "orbs" stanza.
-# orbs:
-#  hello: circleci/hello-build@0.0.5
+  home_url: "https://tailscale.com"
+  source_url: "https://github.com/orbiously/tailscale-orb"
