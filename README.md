@@ -25,7 +25,7 @@ This orb **supports all executors** (Docker,  Linux `machine`, macOS, and Window
 
 - If you wish to use the remote Tailscale host as a bastion/jump host:
     - You will need to [start (or restart) Tailscale as a subnet router](https://tailscale.com/kb/1019/subnets/) on that Tailscale host in order to expose the physical subnet route(s) to your target(s).
-    - However, the orb won't allow you to use the remote Tailscale host an "exit node". (See "[Caveats & limitations](https://github.com/orbiously/tailscale-orb/edit/alpha/README.md#caveats--limitations)")
+    - However, the orb won't allow you to use the remote Tailscale host an "exit node". (See "[Caveats & limitations](https://github.com/orbiously/tailscale-orb#caveats--limitations)")
 
 ## Features
 
@@ -70,7 +70,7 @@ This is an [**uncertified** orb](https://circleci.com/docs/orbs-faq#using-uncert
 
 Should you have questions or encounter an issue while using this orb, please:
 
-1. Refer to the "[Caveats & limitations](https://github.com/orbiously/tailscale-orb/edit/alpha/README.md#caveats--limitations)" section.
+1. Refer to the "[Caveats & limitations](https://github.com/orbiously/tailscale-orb#caveats--limitations)" section.
 2. Check if there is a similar [existing question/issue](https://github.com/orbiously/tailscale-orb/issues). If so, you can add details about your instance of the issue.
 3. Visit the [Orb Category of CircleCI Discuss](https://discuss.circleci.com/c/orbs). 
 4. If none of the above helps, [open your own issue](https://github.com/orbiously/tailscale-orb/issues/new/choose) with a **detailled** description.
