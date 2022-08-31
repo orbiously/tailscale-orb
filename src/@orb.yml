@@ -1,10 +1,7 @@
 version: 2.1
 
 description: >
-  Connect the build-host to your Tailnet and establish a link with another Tailscale host.
-  You can then use that remote Tailscale host as a bastion/jump host.
-  This is an “executor-agnostic” orb; the commands work regrdless of the job's executor.
-  All executors (Docker,  Linux `machine`, macOS, and Windows) are supported.
+  An executor-agnostic orb to connect the build-host to your Tailnet and establish a link with another Tailscale machine.
 
 display:
   home_url: "https://tailscale.com"
