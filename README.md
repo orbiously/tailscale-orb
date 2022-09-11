@@ -8,11 +8,16 @@ This orb will allow users to connect the build-host to a [Tailscale Tailnet](htt
 
 You can then also use the remote Tailscale host as a bastion/jump host to relay the traffic from your Tailscale network onto your physical subnet.
 
-**This is an “executor-agnostic” orb; there is only one set of commands which can be used on any executor. The orb’s underlying code handles the OS/platform detection, and runs the appropriate OS-specific bash commands.**
+**This is an “executor-agnostic” orb; there is only one set of commands which can be used on any supported executor. The orb’s underlying code handles the OS/platform detection, and runs the appropriate OS-specific bash commands.**
 
-This orb **supports all executors** (Docker,  Linux `machine`, macOS, and Windows).
 
 ---
+
+## Executor support
+
+| Linux (`machine`)  | Windows | macOS  | Docker |
+| :---: | :---: | :---: | :---: |
+| :white_check_mark:  | :white_check_mark:  | :white_check_mark:  | :white_check_mark:  |
 
 ## Requirements
 
