@@ -1,7 +1,7 @@
 version: 2.1
 
 description: >
-  An executor-agnostic orb to connect the build-host to your Tailnet and establish a link with another Tailscale machine.
+  An executor-agnostic orb to connect the build-host to your Tailnet and establish a link with another Tailscale machine, which can then optionally be used as a bastion/jump host
 
 display:
   home_url: "https://tailscale.com"
