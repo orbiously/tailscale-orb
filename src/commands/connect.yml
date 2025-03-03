@@ -2,10 +2,10 @@ description: >
   Use this command to connect the build-host to your Tailnet and confirm reachability of the Tailscale destination host (specified in the `ts-dst-host` parameter).
 
 parameters:
-  ts-dst-host:
+  ts_dst_host:
     description: Tailscale IP/hostname of the Tailscale host you want to connect to or use as a bastion/jump host.
     type: string
-  ts-auth-key:
+  ts_auth_key:
     description: Name of the environment variable containing the Tailscale authentication key.
     type: env_var_name
     default: TS_AUTH_KEY
@@ -14,7 +14,7 @@ steps:
   - run:
       shell: bash
       environment:
-        PARAM_TS_DST_HOST: << parameters.ts-dst-host >>
-        PARAM_TS_AUTH_KEY: << parameters.ts-auth-key >>
+        PARAM_TS_DST_HOST: << parameters.ts_dst_host >>
+        PARAM_TS_AUTH_KEY: << parameters.ts_auth_key >>
       name: Connecting to Tailscale
       command: <<include(scripts/connect.sh)>>
