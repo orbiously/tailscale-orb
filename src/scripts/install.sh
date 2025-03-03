@@ -2,7 +2,7 @@
 install() {
     case $1 in
     [Ll]inux*)
-      if [ -f /.dockerenv ]; then
+      if [ -f /.dockerenv ] || [ -f /run/.containerenv ]; then
         sudo apt-get update && sudo apt-get install -y tmux
         EXECUTOR=docker
       else
