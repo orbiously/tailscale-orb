@@ -16,8 +16,9 @@ jobs:
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "100.100.186.65"
-          ts-auth-key: TS_AUTH_KEY
+          ts_dst_host: "100.113.57.105"
+          ts_auth_key: TS_AUTH_KEY
+          ts_max_pings: 3
       - tailscale/disconnect
   command-tests-linux:
     machine:
@@ -26,7 +27,7 @@ jobs:
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "jumper"
+          ts_dst_host: "jumper"
       - tailscale/disconnect
   command-tests-macos:
     macos:
@@ -34,8 +35,8 @@ jobs:
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "jumper"
-          ts-auth-key: TS_AUTH_KEY
+          ts_dst_host: "jumper"
+          ts_auth_key: TS_AUTH_KEY
       - tailscale/disconnect
   command-tests-windows:
     executor:
@@ -43,7 +44,7 @@ jobs:
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "100.100.186.65"
+          ts_dst_host: "100.100.186.65"
       - tailscale/disconnect
 
 workflows:
