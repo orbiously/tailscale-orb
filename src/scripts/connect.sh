@@ -37,10 +37,10 @@ cat << EOF | sudo tee /Library/LaunchDaemons/com.tailscale.tailscaled.plist 1>/d
   <key>Label</key>
   <string>com.tailscale.tailscaled</string>
   <key>Program</key>
-    <string>/usr/local/bin/tailscaled</string>
+    <string>/opt/homebrew/bin/tailscaled</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/usr/local/bin/tailscaled</string>
+    <string>/opt/homebrew/bin/tailscaled</string>
   </array>
   <key>RunAtLoad</key>
     <false/>
