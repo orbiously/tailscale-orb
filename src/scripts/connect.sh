@@ -26,7 +26,7 @@ case $EXECUTOR in
 
     tailscale_status=(tailscale status)                
     
-    tailscale_ping=(tailscale ping "$PARAM_TS_MAX_PINGS")
+    tailscale_ping=(tailscale ping --c "$PARAM_TS_MAX_PINGS")
     ;;
   macos)
 cat << EOF | sudo tee /Library/LaunchDaemons/com.tailscale.tailscaled.plist 1>/dev/null
