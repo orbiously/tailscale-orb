@@ -31,7 +31,7 @@ jobs:
       - tailscale/disconnect
   command-tests-macos:
     macos:
-      xcode: "14.0.0"
+      xcode: "16.0.0"
     steps:
       - tailscale/install
       - tailscale/connect:
