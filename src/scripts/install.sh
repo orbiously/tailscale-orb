@@ -2,7 +2,7 @@
 install() {
     case $1 in
     [Ll]inux*)
-      if [ -f /.dockerenv ]; then
+      if [ -f /.dockerenv ] || [ -f /run/.containerenv ]; then
         sudo apt-get update && sudo apt-get install -y tmux
         EXECUTOR=docker
       else
@@ -15,14 +15,14 @@ install() {
     [Dd]arwin*)
       printf "Installing Tailscale for macOS\n\n"
       HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_AUTO_UPDATE=1 brew install tailscale
-      PLATFORM=macOS
       EXECUTOR=macos
+      PLATFORM=macOS
       ;;
     msys*|MSYS*|nt|win*)
       printf "Installing Tailscale for Windows\n\n"
       choco install tailscale -y
-      PLATFORM=Windows
       EXECUTOR=windows
+      PLATFORM=Windows
       ;;
     esac
 }

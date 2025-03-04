@@ -8,6 +8,6 @@ case $EXECUTOR in
     sudo tailscale down
     ;;
   windows)
-    /c/PROGRA~2/"Tailscale IPN"/tailscale.exe down
+    /c/PROGRA~1/Tailscale/tailscale.exe down
     ;;
 esac

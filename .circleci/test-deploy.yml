@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   tailscale: orbiously/tailscale@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.1.0
 
 filters: &filters
   tags:
@@ -16,26 +16,28 @@ jobs:
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "100.100.186.65"
-          ts-auth-key: TS_AUTH_KEY
+          ts_dst_host: "100.113.57.105"
+          ts_auth_key: TS_AUTH_KEY
+          ts_max_pings: 5
       - tailscale/disconnect
   command-tests-linux:
     machine:
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2004:2024.11.1
     resource_class: medium
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "jumper"
+          ts_dst_host: "jumper"
       - tailscale/disconnect
   command-tests-macos:
     macos:
-      xcode: "14.0.0"
+      xcode: "16.0.0"
+    resource_class: macos.m1.medium.gen1
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "jumper"
-          ts-auth-key: TS_AUTH_KEY
+          ts_dst_host: "jumper"
+          ts_auth_key: TS_AUTH_KEY
       - tailscale/disconnect
   command-tests-windows:
     executor:
@@ -43,7 +45,7 @@ jobs:
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts-dst-host: "100.100.186.65"
+          ts_dst_host: "100.113.57.105"
       - tailscale/disconnect
 
 workflows:

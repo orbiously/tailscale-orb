@@ -8,24 +8,29 @@ This orb will allow users to connect the build-host to a [Tailscale Tailnet](htt
 
 You can then also use the remote Tailscale host as a bastion/jump host to relay the traffic from your Tailscale network onto your physical subnet.
 
-**This is an “executor-agnostic” orb; there is only one set of commands which can be used on any executor. The orb’s underlying code handles the OS/platform detection, and runs the appropriate OS-specific bash commands.**
+**This is an “executor-agnostic” orb; there is only one set of commands which can be used on any supported executor. The orb’s underlying code handles the OS/platform detection, and runs the appropriate OS-specific bash commands.**
 
-This orb **supports all executors** (Docker,  Linux `machine`, macOS, and Windows).
 
 ---
+
+## Executor support
+
+| Linux (`machine`)  | Windows | macOS  | Docker |
+| :---: | :---: | :---: | :---: |
+| :white_check_mark:  | :white_check_mark:  | :white_check_mark:  | :white_check_mark:  |
 
 ## Requirements
 
 - You need to have an existing [Tailnet](https://tailscale.com/kb/1136/tailnet/) with **at least one online** Tailscale machine.
-    - The Tailscale hostname/IP **must be** referenced via the `ts-dst-host` parameter of the orb's `connect` command.
+    - The Tailscale hostname/IP **must be** referenced via the `ts_dst_host` parameter of the orb's `connect` command.
 
 - You **must** create a [Tailscale auth key](https://tailscale.com/kb/1085/auth-keys/) and store it in an environment variable (either in the [project settings](https://circleci.com/docs/env-vars#setting-an-environment-variable-in-a-project) or in an [organization context](https://circleci.com/docs/env-vars#setting-an-environment-variable-in-a-context)).
     - Be mindful of the [type of auth key](https://tailscale.com/kb/1085/auth-keys/#types-of-auth-keys) you create.
-    - By default, the orb's `connect` command expects the Tailscale auth key to be stored in an environment variable named `TS_AUTH_KEY`, however you can opt to store the auth key in a custom-named environment variable; in such case, the environment variable's name **must be** passed to the orb's `connect` command via the `ts-auth-key` parameter.
+    - By default, the orb's `connect` command expects the Tailscale auth key to be stored in an environment variable named `TS_AUTH_KEY`, however you can opt to store the auth key in a custom-named environment variable; in such case, the environment variable's name **must be** passed to the orb's `connect` command via the `ts_auth_key` parameter.
 
 - If you wish to use the remote Tailscale host as a bastion/jump host:
     - You will need to [start (or restart) Tailscale as a subnet router](https://tailscale.com/kb/1019/subnets/) on that Tailscale host in order to expose the physical subnet route(s) to your target(s).
-    - However, the orb won't allow you to use the remote Tailscale host an "exit node". (See "[Caveats & limitations](https://github.com/orbiously/tailscale-orb/edit/alpha/README.md#caveats--limitations)")
+    - However, the orb won't allow you to use the remote Tailscale host an "exit node". (See "[Caveats & limitations](https://github.com/orbiously/tailscale-orb#caveats--limitations)")
 
 ## Features
 
@@ -43,7 +48,7 @@ The `install` command will:
 
 The `connect` command will:
 - Start Tailscale on the build-host and connect it to your Tailnet.
-- Attempt to establish a direct link to the Tailscale machine referenced in the `ts-dst-host` parameter.
+- Attempt to establish a direct link to the Tailscale machine referenced in the `ts_dst_host` parameter.
 
 The `disconnect` command will:
 - Disconnect the build-host from your Tailnet.
@@ -70,7 +75,7 @@ This is an [**uncertified** orb](https://circleci.com/docs/orbs-faq#using-uncert
 
 Should you have questions or encounter an issue while using this orb, please:
 
-1. Refer to the "[Caveats & limitations](https://github.com/orbiously/tailscale-orb/edit/alpha/README.md#caveats--limitations)" section.
+1. Refer to the "[Caveats & limitations](https://github.com/orbiously/tailscale-orb#caveats--limitations)" section.
 2. Check if there is a similar [existing question/issue](https://github.com/orbiously/tailscale-orb/issues). If so, you can add details about your instance of the issue.
 3. Visit the [Orb Category of CircleCI Discuss](https://discuss.circleci.com/c/orbs). 
 4. If none of the above helps, [open your own issue](https://github.com/orbiously/tailscale-orb/issues/new/choose) with a **detailled** description.
