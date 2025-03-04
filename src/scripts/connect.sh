@@ -51,6 +51,15 @@ EOF
     sudo launchctl load /Library/LaunchDaemons/com.tailscale.tailscaled.plist
     sudo launchctl start com.tailscale.tailscaled
 
+    while true; do
+      status=$(sudo launchctl list com.tailscale.tailscaled | awk '{print $1}')
+      if [ "$status" != "-" ]; then
+        break
+      fi
+      sleep 1
+    done
+
+
     tailscale_connect=(tailscale up "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes)
 
     tailscale_status=(tailscale status)
