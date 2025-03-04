@@ -44,7 +44,7 @@ jobs:
     steps:
       - tailscale/install
       - tailscale/connect:
-          ts_dst_host: "100.100.186.65"
+          ts_dst_host: "100.113.57.105"
       - tailscale/disconnect
 
 workflows:
