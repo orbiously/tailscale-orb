@@ -51,6 +51,7 @@ EOF
     sudo launchctl load /Library/LaunchDaemons/com.tailscale.tailscaled.plist
     sudo launchctl start com.tailscale.tailscaled
 
+
     while true; do
       status=$(sudo launchctl list com.tailscale.tailscaled | awk '{print $1}')
       if [ "$status" != "-" ]; then
