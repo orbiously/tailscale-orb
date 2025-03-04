@@ -18,7 +18,7 @@ jobs:
       - tailscale/connect:
           ts_dst_host: "100.113.57.105"
           ts_auth_key: TS_AUTH_KEY
-          ts_max_pings: 3
+          ts_max_pings: 5
       - tailscale/disconnect
   command-tests-linux:
     machine:
