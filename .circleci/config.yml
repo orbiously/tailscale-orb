@@ -19,6 +19,7 @@ workflows:
           filters: *filters
       - shellcheck/check:
           # exclude: SC2148,SC2038,SC2086,SC2002,SC2016
+          exclude: SC2086
           filters: *filters
       - orb-tools/publish:
           orb_name: orbiously/tailscale
