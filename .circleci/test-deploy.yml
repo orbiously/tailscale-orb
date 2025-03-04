@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   tailscale: orbiously/tailscale@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
-  win: circleci/windows@4.1.1
+  win: circleci/windows@5.1.0
 
 filters: &filters
   tags:
