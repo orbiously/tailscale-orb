@@ -32,6 +32,7 @@ jobs:
   command-tests-macos:
     macos:
       xcode: "16.0.0"
+    resource_class: macos.m1.medium.gen1
     steps:
       - tailscale/install
       - tailscale/connect:
