@@ -26,7 +26,7 @@ case $EXECUTOR in
 
     tailscale_status=(tailscale status)                
     
-    tailscale_ping=(tailscale ping)
+    tailscale_ping=(tailscale ping "$PARAM_TS_MAX_PINGS")
     ;;
   macos)
 cat << EOF | sudo tee /Library/LaunchDaemons/com.tailscale.tailscaled.plist 1>/dev/null
@@ -54,19 +54,19 @@ EOF
     tailscale_connect=(tailscale up "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes)
 
     tailscale_status=(tailscale status)
-    tailscale_ping=(tailscale ping "--c $PARAM_TS_MAX_PINGS")
+    tailscale_ping=(tailscale ping --c "$PARAM_TS_MAX_PINGS")
     ;;
   linux)
     tailscale_connect=(sudo tailscale up "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes)
 
     tailscale_status=(tailscale status)
-    tailscale_ping=(tailscale ping "--c $PARAM_TS_MAX_PINGS")
+    tailscale_ping=(tailscale ping --c "$PARAM_TS_MAX_PINGS")
     ;;
   windows)
     tailscale_connect=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe up "--authkey=${!PARAM_TS_AUTH_KEY}" "--hostname=$CIRCLE_PROJECT_USERNAME-$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM" --accept-routes)
 
     tailscale_status=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe status)
-    tailscale_ping=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe ping "--c $PARAM_TS_MAX_PINGS")
+    tailscale_ping=(/c/PROGRA~2/"Tailscale IPN"/tailscale.exe ping --c "$PARAM_TS_MAX_PINGS")
     ;;
 esac
 
